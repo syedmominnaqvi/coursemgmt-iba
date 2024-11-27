@@ -1,8 +1,7 @@
 package com.iba.course_mgmt.model;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 @Table(name = "courses")
@@ -18,12 +17,12 @@ public class Course {
     @Column
     private String description;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "created_at")
+    private String createdAt;
 
     @PrePersist
     protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = String.valueOf(Instant.now().getEpochSecond());
     }
 
     // Getters and Setters
@@ -51,11 +50,11 @@ public class Course {
         this.description = description;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 }
